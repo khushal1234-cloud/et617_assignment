@@ -10,7 +10,7 @@ export default function App() {
   // Central clickstream logger (matches your backend's expected keys)
   const logEvent = async (eventType, extraData = "") => {
     try {
-      await fetch("http://localhost:5000/events", {
+      await fetch(`${import.meta.env.VITE_API_URL}/events`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
