@@ -1,29 +1,39 @@
 import React from "react";
 
 export default function Content({ username, onLogout, onVideoPlay }) {
-  return (
-    <div className="content-container">
-      <header className="header">
-        <h2>Welcome {username}</h2>
-        <button onClick={onLogout}>Logout</button>
-      </header>
+  const videos = [
+    { id: "Mathematics", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+    { id: "Physics", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+    { id: "Chemistry", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+  ];
 
-      <h3>Videos</h3>
-      <div className="video-grid">
-        {["video1", "video2", "video3"].map((vid) => (
-          <video
-            key={vid}
-            width="320"
-            controls
-            onPlay={() => onVideoPlay(vid)}
-          >
-            <source
-              src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-              type="video/mp4"
-            />
-          </video>
-        ))}
+  return (
+    <>
+      <div className="navbar">
+        <div className="navbar-inner container">
+          <div><strong>Welcome</strong> {username}</div>
+          <button className="btn btn-danger" onClick={onLogout}>Logout</button>
+        </div>
       </div>
-    </div>
+
+      <div className="container">
+        <h3 className="section-title">Videos</h3>
+        <div className="video-grid">
+          {videos.map((v) => (
+            <div className="video-card" key={v.id}>
+              <video
+                className="video"
+                controls
+                onPlay={() => onVideoPlay(v.id)}
+              >
+                <source src={v.src} type="video/mp4" />
+              </video>
+              <div className="video-label">{v.id.toUpperCase()}</div>
+            </div>
+          ))}
+        </div>
+        <div className="spacer" />
+      </div>
+    </>
   );
 }
